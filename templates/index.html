@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>Générateur QR Code</title>
+</head>
+<body class="dark-theme"> <!-- Utilisation de la classe dark-theme par défaut -->
+    <div class="container">
+        <h1>Générateur QR Code</h1>
+        <form id="qrForm">
+            <input type="text" id="link" placeholder="Insérez le lien ici" required>
+            <input type="color" id="color" value="#000000"> <!-- Sélecteur de couleur -->
+            <button type="submit">Générer QR Code</button>
+        </form>
+        <div id="qrCode" class="qr-code" style="display: none;"></div>
+    </div>
+    <div class="footer">Developped by HKH00</div>
+
+    <script>
+        document.getElementById('qrForm').onsubmit = function(event) {
+            event.preventDefault();
+            const link = document.getElementById('link').value;
+            const color = document.getElementById('color').value; // Récupérer la couleur
+            generateQRCode(link, color);
+        };
+
+        function generateQRCode(link, color) {
+            fetch('/generate_qr', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ link: link, color: color }) // Passer la couleur dans le corps de la requête
+            })
+            .then(response => response.json())
+            .then(data => {
+                const qrCodeDiv = document.getElementById('qrCode');
+                qrCodeDiv.innerHTML = `<img src="data:image/png;base64,${data.qr_code}" alt="QR Code">`;
+                qrCodeDiv.style.display = 'block'; // Afficher le QR code
+            });
+        }
+    </script>
+</body>
+</html>
