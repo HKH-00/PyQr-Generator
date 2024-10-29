@@ -1,6 +1,5 @@
 # PyQr-Generator
-********************************************************************************** PyQr-Generator *********************************************************************************************
-est une application web simple et efficace qui vous permet de générer des QR codes personnalisés à partir d'URL ou de texte. Développé avec Python et Flask, cet outil offre une interface moderne et intuitive.
+PyQr-Generator est une application web simple et efficace qui vous permet de générer des QR codes personnalisés à partir d'URL ou de texte. Développé avec Python et Flask, cet outil offre une interface moderne et intuitive.
 
 ## Fonctionnalités
 
